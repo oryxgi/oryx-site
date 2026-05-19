@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oryx Group International</title>
+  <meta name="description" content="Oryx Group International advises energy projects through strategic, commercial, and operational guidance." />
+  <style>
+    :root {
+      --bg: #0e1110;
+      --panel: rgba(20, 23, 21, 0.76);
+      --panel-solid: #171a18;
+      --text: #f4f1ea;
+      --muted: #c9c2b4;
+      --soft: #8f897d;
+      --accent: #c59b55;
+      --accent-dark: #9d7536;
+      --border: rgba(255, 255, 255, 0.14);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .hero {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: stretch;
+      background: #101210;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(14, 17, 16, 0.95) 0%, rgba(14, 17, 16, 0.74) 42%, rgba(14, 17, 16, 0.18) 100%),
+        linear-gradient(180deg, rgba(14, 17, 16, 0.1) 0%, rgba(14, 17, 16, 0.72) 100%),
+        url("oryx.jpg") center / cover no-repeat;
+      filter: saturate(0.88) contrast(1.05);
+      z-index: 0;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(circle at 20% 20%, rgba(197, 155, 85, 0.18), transparent 32%),
+        radial-gradient(circle at 80% 70%, rgba(255, 255, 255, 0.05), transparent 36%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .page {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+    }
+
+    header {
+      padding: 28px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .mark {
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-weight: 800;
+      background: rgba(255,255,255,0.04);
+      backdrop-filter: blur(16px);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .nav-cta {
+      padding: 10px 16px;
+      border: 1px solid rgba(197, 155, 85, 0.5);
+      border-radius: 999px;
+      color: var(--text);
+      background: rgba(197, 155, 85, 0.12);
+    }
+
+    .hero-content {
+      min-height: calc(100vh - 96px);
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 44px;
+      align-items: center;
+      padding: 48px 0 92px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--accent);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 22px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 42px;
+      height: 1px;
+      background: var(--accent);
+    }
+
+    h1 {
+      font-size: clamp(3rem, 7vw, 6.6rem);
+      line-height: 0.92;
+      letter-spacing: -0.07em;
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .hero-copy {
+      max-width: 650px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 1.45vw, 1.28rem);
+      margin-bottom: 34px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 750;
+      transition: transform 0.2s ease, background 0.2s ease, border 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #15120e;
+      box-shadow: 0 14px 36px rgba(197, 155, 85, 0.25);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: rgba(255,255,255,0.05);
+      color: var(--text);
+      backdrop-filter: blur(14px);
+    }
+
+    .summary-card {
+      justify-self: end;
+      width: min(430px, 100%);
+      padding: 28px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(20px);
+    }
+
+    .summary-card h2 {
+      font-size: 1.4rem;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .summary-card p {
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .stat {
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 14px;
+      background: rgba(255,255,255,0.04);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.25rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat span {
+      display: block;
+      color: var(--soft);
+      font-size: 0.78rem;
+      line-height: 1.3;
+    }
+
+    main {
+      background: #101210;
+    }
+
+    section {
+      padding: 90px 0;
+    }
+
+    .section-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 54px;
+      align-items: start;
+    }
+
+    .section-label {
+      color: var(--accent);
+      font-size: 0.78rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 1.1rem;
+      max-width: 760px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 34px;
+    }
+
+    .card {
+      padding: 24px;
+      min-height: 230px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.025));
+    }
+
+    .card .number {
+      color: var(--accent);
+      font-weight: 800;
+      margin-bottom: 24px;
+      font-size: 0.88rem;
+    }
+
+    .card h3 {
+      font-size: 1.22rem;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.98rem;
+    }
+
+    .contact-wrap {
+      border: 1px solid var(--border);
+      border-radius: 34px;
+      background:
+        linear-gradient(135deg, rgba(197, 155, 85, 0.14), transparent 42%),
+        var(--panel-solid);
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-copy {
+      padding: 42px;
+      border-right: 1px solid var(--border);
+    }
+
+    .contact-copy p {
+      color: var(--muted);
+      margin-top: 18px;
+    }
+
+    form {
+      padding: 42px;
+      display: grid;
+      gap: 16px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 650;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(0,0,0,0.22);
+      color: var(--text);
+      border-radius: 16px;
+      padding: 14px 16px;
+      font: inherit;
+      outline: none;
+    }
+
+    input:focus,
+    textarea:focus {
+      border-color: rgba(197, 155, 85, 0.7);
+    }
+
+    textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .form-note {
+      color: var(--soft);
+      font-size: 0.84rem;
+    }
+
+    .form-note a {
+      color: var(--accent);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    footer {
+      padding: 34px 0;
+      color: var(--soft);
+      border-top: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 900px) {
+      nav {
+        display: none;
+      }
+
+      .hero-content,
+      .section-grid,
+      .contact-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .summary-card {
+        justify-self: start;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-copy {
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+      }
+    }
+
+    @media (max-width: 560px) {
+      .page {
+        width: min(100% - 28px, 1180px);
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      section {
+        padding: 66px 0;
+      }
+
+      .contact-copy,
+      form {
+        padding: 28px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="hero" id="top">
+    <div class="page">
+      <header>
+        <a class="brand" href="#top" aria-label="Oryx Group International home">
+          <span class="mark">O</span>
+          <span>Oryx Group International</span>
+        </a>
+        <nav aria-label="Primary navigation">
+          <a href="#about">About</a>
+          <a href="#advisory">Advisory</a>
+          <a class="nav-cta" href="#contact">Contact</a>
+        </nav>
+      </header>
+
+      <div class="hero-content">
+        <div>
+          <div class="eyebrow">Energy project advisory</div>
+          <h1>Guidance for complex energy opportunities.</h1>
+          <p class="hero-copy">
+            Oryx Group International supports energy project stakeholders with practical advisory, market perspective, and project development insight across early-stage opportunities, partnerships, and execution planning.
+          </p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#contact">Start a conversation</a>
+            <a class="btn btn-secondary" href="#advisory">View advisory focus</a>
+          </div>
+        </div>
+
+        <aside class="summary-card" aria-label="Company summary">
+          <h2>Independent perspective for high-stakes decisions.</h2>
+          <p>
+            From opportunity screening to partner alignment, Oryx Group International helps teams move from ambition to informed action.
+          </p>
+          <div class="stats">
+            <div class="stat">
+              <strong>01</strong>
+              <span>Project strategy</span>
+            </div>
+            <div class="stat">
+              <strong>02</strong>
+              <span>Commercial advisory</span>
+            </div>
+            <div class="stat">
+              <strong>03</strong>
+              <span>Stakeholder alignment</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section id="about">
+      <div class="page section-grid">
+        <div>
+          <div class="section-label">About</div>
+          <h2>Built for projects that require discretion, clarity, and momentum.</h2>
+        </div>
+        <div>
+          <p class="lead">
+            Oryx Group International is an advisory group focused on supporting energy initiatives where strategic judgment, commercial understanding, and practical execution experience matter. The group works with project owners, investors, developers, and partners seeking clearer paths through complex decisions.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="advisory">
+      <div class="page">
+        <div class="section-label">Advisory focus</div>
+        <h2>Support across the project lifecycle.</h2>
+        <div class="cards">
+          <article class="card">
+            <div class="number">01</div>
+            <h3>Opportunity assessment</h3>
+            <p>Evaluate project context, market drivers, commercial assumptions, and the practical realities that affect viability.</p>
+          </article>
+          <article class="card">
+            <div class="number">02</div>
+            <h3>Partnership and positioning</h3>
+            <p>Support stakeholder alignment, partner discussions, and project narratives that help move opportunities forward.</p>
+          </article>
+          <article class="card">
+            <div class="number">03</div>
+            <h3>Execution planning</h3>
+            <p>Help translate strategic intent into practical next steps, risk considerations, and decision-ready planning.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="page">
+        <div class="contact-wrap">
+          <div class="contact-copy">
+            <div class="section-label">Contact</div>
+            <h2>Discuss an energy project or advisory need.</h2>
+            <p>
+              Use the form to share a short note. Replace the form action URL with your preferred third-party mailer endpoint before publishing.
+            </p>
+          </div>
+
+          <!--
+            FORM SETUP:
+            1. Create a form endpoint with a provider like Formspree, Basin, Getform, or Web3Forms.
+            2. Replace the action URL below with your provider endpoint.
+            3. Keep the method as POST.
+          -->
+          <form action="https://api.web3forms.com/submit" method="POST">
+           <input type="hidden" name="access_key" value="9e41fa81-9707-4c07-b7e6-497e5c2bab74">
+            <label>
+              Name
+              <input type="text" name="name" autocomplete="name" required />
+            </label>
+            <label>
+              Email
+              <input type="email" name="email" autocomplete="email" required />
+            </label>
+            <label>
+              Message
+              <textarea name="message" required></textarea>
+            </label>
+            <input type="hidden" name="_subject" value="New inquiry from Oryx Group International landing page" />
+            <button class="btn btn-primary" type="submit">Send inquiry</button>
+            <p class="form-note">
+              This static page is GitHub Pages friendly. For spam filtering, use a form service that includes CAPTCHA, honeypot, rate limiting, or email verification.
+            </p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="page footer-inner">
+      <span>© <span id="year"></span> Oryx Group International. All rights reserved.</span>
+      <a href="#top">Back to top</a>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
+
